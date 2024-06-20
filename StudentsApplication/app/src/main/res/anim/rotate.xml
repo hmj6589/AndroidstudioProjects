@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+	android:fromDegrees="0"
+	android:toDegrees="360"
+	android:pivotX="50%"
+	android:pivotY="50%"
+	android:duration="2000"
+	/>
+
+<!--0도에서부터 360도 한바퀴 회전하겠다-->
+
+<!--회전 중심은 정방향-->
+<!--2초동안 하겠다-->

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_search"
+        android:title="search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always"/>
+<!--    view를 가지고 있다는 것은 코틀린 측에서 제어가 가능하다는 뜻-->
+<!--    showAsAction -> always로 이 안에 있는 화면이 밖에 보이게 설정-->
+<!--    원래는 never(안보이게)-->
+<!--    엑션 바에 공간 있으면 밖에 보이게 / 없으면 안으로 들어가게 : ifRoom-->
+
+    <item
+        android:id="@+id/item1"
+        android:title="아이템1"/>
+    <item
+        android:id="@+id/item2"
+        android:title="아이템2"/>
+    <item
+        android:id="@+id/item3"
+        android:title="아이템3"/>
+    <item
+        android:id="@+id/item4"
+        android:title="아이템4"/>
+
+</menu>

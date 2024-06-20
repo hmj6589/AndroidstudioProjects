@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/notificationButton"
+
+        android:text="알림 발생!" />
+
+<!--    app:videoId="WHrANzPs9ww" -->
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:id="@+id/youtube_player_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="100dp"
+
+        app:videoId="Ec0Z1v7jKDQ"
+        app:autoPlay="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal" >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이동"
+            android:id="@+id/btnTranslate" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회전"
+            android:id="@+id/btnRotate" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="스케일"
+            android:id="@+id/btnScale" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="투명도"
+            android:id="@+id/btnAlpha" />
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="복합 에님"
+        android:id="@+id/btnWave" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/rocketImage"/>
+
+</LinearLayout>
+
+<!--    메인 엑티비티 쪽에 따로 뭘 하지 않아도 유튜브 플레이어 뜸-->
+
+<!--    오토 플레이 ? : 바로 실행하게 할 것인가-->
+<!--    (실습할 때마다 실행됨)-->
+
+<!--    app:videoId="WHrANzPs9ww" 이것을 통해서 어떤 유튜브 영상을 뜨게 할건지 설정-->
+<!--유튜브 영상은 각 영상마다 각 아이디를 갖고 있음-->
+<!--    https ://www.youtube.com/watch?v=WHrANzPs9ww-->

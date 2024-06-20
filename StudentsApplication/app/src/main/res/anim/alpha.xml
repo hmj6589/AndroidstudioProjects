@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<alpha xmlns:android="http://schemas.android.com/apk/res/android"
+	android:fromAlpha="0.0"
+	android:toAlpha="1.0"
+	android:duration="3000"
+	/>
+
+<!--3초동안 하겠다-->
+
+<!--0 : 완전 투명 (그림은 있는데 눈에 안보임)-->
+
+<!--1.0 : 불투명-->

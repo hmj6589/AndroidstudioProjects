@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ch18_image2</string>
+    <string name="drawer_opened">Opened Drawer</string>
+    <string name="drawer_closed">Closed Drawer</string>
+
+    <string name="default_client_id">544526308936-fj9sg8c2f6d7u064ubmnor3b6fsnggr8.apps.googleusercontent.com</string>
+    // clinet 키
+
+</resources>

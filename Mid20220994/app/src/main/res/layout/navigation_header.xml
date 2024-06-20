@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="#FF0000">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+
+
+        android:src="@drawable/duksae" />
+
+    <TextView
+        android:id="@+id/hello"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+
+        android:layout_below="@+id/imageView"
+        android:text="안녕하세요"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+
+        android:textSize="20dp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@id/school"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="덕성여자대학교"
+        android:textColor="@color/white"
+        android:layout_below="@+id/hello"/>
+
+
+
+</RelativeLayout>

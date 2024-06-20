@@ -1,0 +1,98 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:id="@+id/drawer"
+
+
+    android:fitsSystemWindows="true"
+
+
+    tools:context=".MainActivity">
+
+<!--android:fitsSystemWindows="true" 속성은 뷰가 차지할 수 있는 영역을 상태바 및 소프트키 영역을 제외한 영역까지 확장해주는 역할-->
+
+<!--    1. 본 화면-->
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="날짜 선택"
+            android:id="@+id/btnDate" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="시간 선택"
+            android:id="@+id/btnTime" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="알림창"
+            android:id="@+id/btnAlert" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="알림창 - 아이템"
+            android:id="@+id/btnAlertItem" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="알림창 - 하나만 선택"
+            android:id="@+id/btnAlertSingle" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="알림창 - 다수 선택"
+            android:id="@+id/btnAlertMulti" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="알림창 - 사용자"
+            android:id="@+id/btnAlertCustom" />
+    </LinearLayout>
+
+<!--    2. 드로어 화면-->
+<!--    드로어 화면이 숨겨져 있는 ...-->
+<!--    <TextView-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#ff0000"-->
+
+<!--        android:layout_gravity="start"-->
+
+<!--        android:gravity="center"-->
+<!--        android:fitsSystemWindows="true"-->
+
+<!--        android:text="I am Drawer"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="20dp"-->
+<!--        android:textStyle="bold" />-->
+<!--    android:fitsSystemWindows="true"은 이 화면이 뜨는 폰에 대해 적절하게 맞춰서 배치되어라~ 라는 뜻-->
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+
+        android:layout_gravity="start"
+
+        android:gravity="center"
+        android:fitsSystemWindows="true"
+        android:id="@+id/mainDrawerView"
+        app:headerLayout="@layout/navigation_header"
+        app:menu="@menu/menu_provider"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

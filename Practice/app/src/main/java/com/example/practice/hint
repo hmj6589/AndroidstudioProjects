@@ -1,0 +1,454 @@
+- match_parent : 부모 객체에 화면 맞추는 것((전체 화면 기준으로 생각하기))
+- wrap_content : 안에 한번더 맞춰서 하는 느낌
+- LinearLayout : 수직 배치
+- RelativeLayout : 배치 관련 내가 다 짜줘야해
+
+- android:orientation="horizontal" : 수평 배치
+- RelativaLayout인데 누군가의 아래로 배치되고 싶다 : android:layout_below="@id/radio"
+
+- manifest.xml 오류 -> import, package 확인하기 가끔 너가 등록해둔 이름 말고 다른거 들어가있을 때가 많아 (복붙..)
+
+
+1. 뷰 바인딩 (맨처음 viewBinding 방법->싱크 나우도 하기)
+    1) Gradle Scripts 폴더에 build.gradle.kts(app) 파일
+
+    viewBinding{
+        enable=true
+    }
+
+    2) MainActivity.kt 파일
+
+    val binding = ActivityMainBinding.inflate(layoutInflater)
+    // 뷰바인딩 설정 : 이렇게 해야 xml에 있는 걸 코틀린으로 가져올 수 있음
+
+    setContentView(binding.root)
+
+# NavigationView 배치
+1) navigation_header.xml
+2) menu 폴더 만들고
+    menu_navigation.xml
+    menu_provider.xml
+
+
+2. 액션 바 : 화면 위쪽에 뜨는 바
+    1) 액션바 제거하기 -> themes.xml
+    <style name="Base.Theme.Practice" parent="Theme.Material3.DayNight.NoActionBar">
+    요거 지우기
+
+
+3. DrawerLayout을 이용하여 Drawer 배치하기
+    : DrawerLayout이란? 왼쪽에서 접었다가 펼쳤다가 보이게 하는 것
+
+    1) DrawerLayout 화면 구성하기
+    (EventApplication 프로젝트에 ch10_dialog의 main.xml 확인하기)
+
+    - android:fitsSystemWindows="true" 속성 : 폰의 화면 크기에 맞춰 보여준다.
+
+    - activity_main.xml 파일
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <androidx.drawerlayout.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/drawer"
+        android:fitsSystemWindows="true"
+        tools:context=".MainActivity">
+
+        <!--    1. 본 화면-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            >
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="날짜 선택"
+                android:id="@+id/btnDate" />
+        </LinearLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+
+            android:layout_gravity="start"
+
+            android:gravity="center"
+            android:fitsSystemWindows="true"
+            android:id="@+id/mainDrawerView"
+            app:headerLayout="@layout/navigation_header"
+            app:menu="@menu/menu_provider"/>
+
+        <!-- navigationview 매치합니다 --!>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+    2) Drawer 화면에 NavicationView 배치
+    -> layout 폴더에 navigation_header.xml 파일과 menu를 위한 폴더 제작
+
+        1) navigation_header.xml
+        -> 펼쳤을 때 헤더 어떻게 생겼는지 구성
+
+        2) menu 폴더 만들고 navigation_menu.xml 제작
+        -> 그 안에 들어갈 아이템들 작성
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <menu xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+            <item
+                android:id="@+id/item_info"
+                android:icon="@android:drawable/ic_menu_info_details"
+                android:title="웹사이트 방문하기"/>
+
+        </menu>
+
+        3) activity_main.xml에 만들어둔 navigationview 배치하기
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+
+            android:layout_gravity="start"
+
+            android:gravity="center"
+            android:fitsSystemWindows="true"
+            android:id="@+id/mainDrawerView"
+            app:headerLayout="@layout/navigation_header"
+            app:menu="@menu/만들어둔 네비게이션_메뉴 아이디"/>
+
+        - 안드로이드에서 제공하는 아이콘 이용? -> navigation_menu.xml에서 android:icon="@android:drawable/ic_menu_info_details" 요런 문장 이용
+
+4. Fragment 만들기
+    1) Fragment kotlin 파일 -> blank 이면 만들 때 주의해서 만들기 (Fragment(blank))
+
+    2) fragment xml 파일이 자동으로 만들어진 것 확인하기
+     - fragment 배경 색깔 바꾸기 -> xml 파일에서      android:background="#ff0000" 이용
+
+    3) MainActivity로 가서 만들어둔 fragment 관리하는 MyFragmentPagerAdapter 만들기
+    (FragmentStateAdapter를 이용하여 Fragment 관리)
+
+    class MyFragmentPagerAdapter(activity:FragmentActivity): FragmentStateAdapter(activity){
+        val fragments : List<Fragment>
+        init{
+            fragments = listOf(OneFragment(), TwoFragment(), ThreeFragment()) // 총 3개의 fregment를 리스트로 담고 있다
+        }
+
+        // 반드시 포함해야하는 오버라이드 함수 -> getItemCount()
+        override fun getItemCount(): Int {
+            return fragments.size
+        }
+        // 반드시 포함해야하는 오버라이드 함수 -> createFragment()
+        override fun createFragment(position: Int): Fragment {
+            // position -> 0-> onefragment 1-> two 2-> three ...
+            return fragments[position]
+        }
+    }
+
+    4) TabLayoutMediator -> 3개의 Fragment 관리하기
+    (oncreate() 함수 안에서 하세요)
+    // 프래그먼트 어댑터 생성
+    val fragmentAdapter = MyFragmentPagerAdapter(this)
+    binding.viewpager.adapter = fragmentAdapter
+
+    // TabLayout과 ViewPager2 연결
+    TabLayoutMediator(binding.tabs, binding.viewpager) { tab, position ->
+        tab.text = "TAB ${position + 1}"
+    }.attach()
+
+5. AppBar , ViewPager2, ToolBar, ActionBar 관리
+    1) AppBar와 ViewPager2를 수직으로 배치한다
+    -> activity_main.xml에서 LinearLayout 활용
+
+    appbar 만들기 -> <com.google.android.material.appbar.AppBarLayout
+
+    viewpager 만들기 -> <androidx.viewpager2.widget.ViewPager2
+
+    2) appbar에 toolbar, ImageView, viewpager 넣기
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appbar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseball"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    3) ToolBar를 ActionBar로 사용하기
+    setSupportActionBar(binding.toolbar) // 툴바를 액션바로 설정
+
+6. ActionBarDrawerToggle 이용해서 Drawer와 연결
+    ** 먼저 전역 변수로
+    lateinit var toggle : ActionBarDrawerToggle // ActionBarDrawerToggle 타입을 가지고 있는 변수 선언
+
+    추가해두고 oncreate() 함수안에 추가하기
+    ---------------------------------
+
+    setSupportActionBar(binding.toolbar) // 툴바를 액션바로 설정
+
+    // --- 토글 관련
+    toggle = ActionBarDrawerToggle(this, binding.drawer, R.string.drawer_opened, R.string.drawer_closed)
+    // 여기서 3번째 인자는 open 했을 때 나오는 string, 4번째 인자는 close 했을 때 나오는 string
+
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    toggle.syncState() // 상태
+
+    // NavigationView.OnNavigationItemSelectedListener 이것도 상속받아야함
+    binding.mainDrawerView.setNavigationItemSelectedListener(this)
+
+
+    1) values 폴더에 strings.xml 내용 바꾸기
+    (res/strings에 변수 선언하여 이용)
+
+    <resources>
+        // <string name="app_name">ch10_dialog</string> 너가 만든 앱 이름 적기 (프로젝트 이름 적기)
+        <string name="drawer_opened">Opened Drawer</string>
+        <string name="drawer_closed">Closed Drawer</string>
+        <string name="hello_blank_fragment">hello_blank_fragment</string>
+    </resources>
+
+7. OptionMenu 이용하여 로그인 메뉴와 검색 메뉴 추가
+    1) navigation_menu.xml
+    -> menu 만들고 -> item들로 구성되어 있음
+
+    2) 항상 보이도록 -> app:showAsAction="always"
+    공간이 있는 경우만 보이도록 -> app:showAsAction="ifRoom"
+
+    3) 검색 메뉴 만들고 SearchView 연결하기
+    (MainActivity.kt 파일)
+
+    // Option 메뉴를 위한 오버라이드 (menu를 다루고 있음)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_navigation, menu)
+        // 여기서 R은 리소스를 뜻한다.
+        // 지금까지는 menu_navigation만 있으면 되는데 뷰를 가지고 있는 메뉴에 대한 부분 -> 따로 관리해줘야 함
+
+        val searchView = menu?.findItem(R.id.menu_search)?.actionView as SearchView
+        // (menu: Menu?) -> menu? 라는 뜻은 null도 가능하다는 뜻이므로 변수 선언할 때 menu?로 적어둬야 함
+        // 코틀린에서 캐스팅 해줄 때는 뒤에 as ~ 로 작성해야함
+        // 여기서는 serchView로 캐스팅 해줄게용!
+        // 근데 SearchView는 multi class이므로 우리는 androidX에서 제공하는 SearchView로 임포트!
+
+        // 검색(Query)하는 이벤트 처리 해주는 코드 작성해볼게요
+        searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+            // 오버라이드 작성
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // 검색어를 입력하고 눌렀을 때 발생하는 이벤트에 대해서 처리
+
+                Toast.makeText(applicationContext, "$query 검색합니다.", Toast.LENGTH_LONG).show()
+                // 원래 첫번째 인자로 mainActivity 타입이 들어가야 하는데 현재 this는 searchView 타입임
+                // 이런 경우에는 this가 아닌 applicationContext 로 대체
+
+                return true
+
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // 텍스트가 바뀔 때 마다 (키보드를 입력할 때 마다) 검색어의 내용이 변경되는 이벤트 처리
+                return true
+            }
+        })
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    4) searchview에 검색어 입력 시 submit 커스텀 다이얼로그 보이기
+    -> dialog_custom.xml 파일 확인
+
+    -> mainactivity.kt 파일 확인
+    // Option 메뉴를 위한 오버라이드 (menu를 다루고 있음)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.navigation_menu, menu)
+
+        val searchView = menu?.findItem(R.id.menu_search)?.actionView as SearchView
+
+        val activityContext = this // 다이얼로그 생성 시 this 대신ㄹ 사용하기 위해서 미리 받아두기
+
+        // 검색(Query)하는 이벤트 처리 해주는 코드 작성해볼게요
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            // 오버라이드 작성
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // 검색어를 입력하고 눌렀을 때 발생하는 이벤트에 대해서 처리
+
+                val dialogBinding = DialogCustomBinding.inflate(layoutInflater)
+
+                // 검색어를 나타내는 TextView들에 사용자가 입력한 검색어 설정
+                dialogBinding.textview2.text = "$query"
+                dialogBinding.textview2.setTextColor(Color.RED)
+
+                // 다이얼로그 생성
+                val dialog = AlertDialog.Builder(activityContext).run {
+                    setTitle("검색어 확인")
+                    setView(dialogBinding.root)
+                    setNegativeButton("닫기", DialogInterface.OnClickListener { dialog, which ->
+                        if (which == DialogInterface.BUTTON_NEGATIVE) {
+                            Log.d("mobileapp", "BUTTON_NEGATIVE")
+                        }
+                    }).create()
+                }
+                dialog.show()
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // 텍스트가 바뀔 때 마다 (키보드를 입력할 때 마다) 검색어의 내용이 변경되는 이벤트 처리
+                return true
+            }
+        })
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    5) 로그인 메뉴 클릭하면 Toast 보이기
+    (toggle -> 보이기
+    login item  눌렸을 때 Toast 보이게 하기)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // 토글 본래 기능 수행
+        if (toggle.onOptionsItemSelected(item)) {
+            return true
+        }
+        // login item -> toast 기능 추가
+        return when (item.itemId) {
+            R.id.login -> {
+                val toast = Toast.makeText(this, "개발중입니다.", Toast.LENGTH_LONG)
+                toast.show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+8. 가로 화면 만들기
+    1) resource 파일 만들기 클릭
+        이름 작성 (activity_main 이랑 똑같이)
+    2) Root Element -> 현재 activity_main 이랑 똑같이 LinearLayout
+    3) orientation -> 조건 무조건 선택 (그래야 가로 버전 사용 가능)
+    android:orientation="horizontal" -> 수평 배치 도움 받기
+
+9. fagment 안에서 디자인 하기
+    1) 날짜 <- kt
+    2) 시간 <- kt
+    3) 선택지 보이기 <- kt
+
+    ** 시간제 표시하기(오전/오후? -> 변수 따로 설정해서 12시간 넘으면 오후로 설정)
+
+    4) 체크된 내용 별도의 textview에서 보이게 하기
+    각 내용에 맞는 변수 두고
+    val name = binding.addEditView.text.toString()
+    val date = binding.selectDate.text.toString()
+    val time = binding.selectTime.text.toString()
+    val studyroomnumber = binding.selectStudyroom.text.toString()
+    로 불러오기
+
+    5) 불러온 내용을 별도의 textview에 보이게 설정해두기
+    // 마지막 버튼을 눌렀을 때 값 넘기기
+    // 가져온 텍스트를 TextView에 설정
+    binding.studyroomResult.text = "예약자 이름은 $name\n예약 날짜는 $date $time \n예약룸은 $studyroomnumber"
+
+10. fragment 안에 디자인 하기
+    1) RecyclerView 사용
+        - xml 에 등록해두기
+
+    2) 순서 (TwoFragment.kt 순서)
+        - binding 설정, adapter 설정, datas 설정
+            lateinit var binding:FragmentTwoBinding
+            lateinit var adapter: MyAdapter
+            var datas= mutableListOf<String>()
+
+        - 그 다음에 adapter 에 MyAdapter(datas) 연결해주기
+        // Inflate the layout for this fragment
+        binding = FragmentTwoBinding.inflate(inflater, container, false)
+
+        // fragment에서~ 사용된 RecyclerView의 데이터를 InstanceState로 관리한다.
+        (savedInstanceState)
+        datas = savedInstanceState?.getStringArrayList("datas")?.toMutableList() ?: mutableListOf()
+
+        binding.recyclerView.addItemDecoration(
+            // 수평선으로 구별해주는
+            DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
+        )
+
+        val adapter = MyAdapter(datas)
+
+        - ActivityResultLauncher 등록해두기
+        requestLauncher 만들어둔다
+        val requestLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data = result.data
+
+                val phoneNumber = data?.getStringExtra("friend_number") // friend_number은 xml에서의 id 값
+                val name = data?.getStringExtra("friend_name") // friend_name은 xml에서의 id 값
+                val combinedResult = "$name\n$phoneNumber" // 이름값과 전화번호값을 합쳐서 반환한다.
+
+                datas.add(combinedResult) // 이름값과 전화번호값을 합쳐서 반환한다.
+
+                adapter.notifyDataSetChanged() // RecyclerView 갱신
+            }
+        }
+
+        - ExtendedFloatingActionButton 눌리면 사용할 setOnClickListener
+         binding.mainFab.setOnClickListener {
+            val intent = Intent(requireContext(), SecondActivity::class.java)
+
+            // 라디오 그룹 내의 체크된 라디오 버튼을 찾아 해당 텍스트를 인텐트에 추가
+            val radiotext = if (binding.radioButton1.isChecked) { // 클릭(isChecked)된 라디오버튼의 문자값 전달
+                binding.radioButton1.text.toString()
+            } else {
+                binding.radioButton2.text.toString()
+            }
+
+            intent.putExtra("radiotext", radiotext)
+
+            // SecondActivity 실행
+            // startActivity(intent)
+            requestLauncher.launch(intent)
+         }
+
+        - 마지막에 어댑터 설정
+        (Adapter 연결해주기 recyclerView에 연결
+        layoutManager -> LinearLayoutManager -> requireContext() 사용하기)
+
+        binding.recyclerView.adapter = adapter // 어댑터 설정
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        - binding.root 반환하기
+        (return binding.root)
+
+    3) ExtendedFloatingActionButton -> SecondActivity 사용
+     - 이 버튼이 눌리면 SecondActivity 화면 나옴
+
+     - save 버튼 누르면 값을 다시 twofragment로 전달(이 전 화면으로 전달)
+     binding.btnSave.setOnClickListener{
+         val name=binding.addName.text.toString()
+         // 선택된 옵션에 따라서 '[친구]' 또는 '[장소]'를 추가
+         val selectedOption = intent.getStringExtra("radiotext") ?: "" // 기본값은 빈 문자열
+         val nameWithType = if (selectedOption == "친구") {
+             "[친구] $name"
+         } else if (selectedOption == "장소") {
+             "[장소] $name"
+         } else {
+             name // 선택된 옵션이 없는 경우에는 이름만 반환
+         }
+
+         var returnIntent = intent
+
+         returnIntent.putExtra("friend_name", nameWithType) // 친구 이름
+         returnIntent.putExtra("friend_number", binding.addNumber.text.toString())
+
+         setResult(Activity.RESULT_OK, returnIntent)
+         finish()
+         true
+     }
+
+     여기서 radiotext는 twofragment로 부터 받은 것

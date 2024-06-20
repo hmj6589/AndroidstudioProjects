@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFA19A"
+    tools:context=".TwoFragment"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="연락처 추가하기"
+        android:textSize="28dp"
+        android:id="@+id/add_friend"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/radio"
+        android:orientation="horizontal"
+        android:layout_below="@id/add_friend"
+        >
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="친구"
+            android:textSize="20dp"
+            android:layout_marginRight="15dp"/>
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="장소" />
+
+    </RadioGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerView"
+        android:layout_below="@id/radio"
+        >
+    </androidx.recyclerview.widget.RecyclerView>
+    <!--    recyclerview는 특별히 뭐안주면 기본이 좌측 상단-->
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/main_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="EXTENDED FAB"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
+    <!--    부모가 누구야 relativelayout 이잖아 그거의 오른쪽 아래에 두어라-->
+
+</RelativeLayout>

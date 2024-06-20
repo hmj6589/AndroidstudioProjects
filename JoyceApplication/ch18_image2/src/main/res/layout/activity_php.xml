@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etAge"
+        android:hint="나이를 입력하세용가리.."/>
+<!--    php로 데이터 불러온 것 중에서 검색해서 불러오게 하기-->
+
+    <Button
+        android:id="@+id/btnPhp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PHP로 데이터 불러오기"/>
+<!--    버튼에 대해서 클릭 리스너 해주기-->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/phpRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
+
+<!--버튼을 누르면 php 연결 -> 보이게 하는-->

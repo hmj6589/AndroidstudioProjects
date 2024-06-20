@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/rocket0" android:duration="200" />
+    <item android:drawable="@drawable/rocket1" android:duration="200" />
+    <item android:drawable="@drawable/rocket2" android:duration="200" />
+    <item android:drawable="@drawable/rocket3" android:duration="200" />
+</animation-list>
+
+<!--한번에 보여지는 시간이 0.2초-->
+<!--차례로 보여지게 함-->

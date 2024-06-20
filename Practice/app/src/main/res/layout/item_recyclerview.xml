@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/item_root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:layout_margin="8dp">
+
+<!--    android:layout_height="wrap_content" 만약 match_parent 했으면 화면 다 쓰니까 이렇게 한고야-->
+
+    <ImageView
+        android:layout_width="83dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_launcher_background" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[친구] 민지"
+            android:textSize="20dp"
+            android:textColor="#3F51B5"
+            android:textStyle="bold"
+            android:id="@+id/friend_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="010-2652-6589"
+            android:id="@+id/friend_number"/>
+    </LinearLayout>
+
+</LinearLayout>

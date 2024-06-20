@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ch_resource2</string>
+    <string name="intro_main">
+    Duksung Women\'s University Overview
+    </string>
+    <string name="intro_detail">
+    Founded in 1920 by Ms. Cha Mirisa, an educator and an activist for women’s rights, Duksung Women’s University has initiated the history for women’s education in Korea for the past 100 years.
+    </string>
+    <string name="intro_cha">About Ms. Chamirisa</string>
+    <string name="intro_button">History</string>
+    <string name="intro_search">Search</string>
+</resources>

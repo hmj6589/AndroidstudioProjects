@@ -1,0 +1,62 @@
+1. LinearLayout (리니어 레이아웃)
+속성
+orientation - horizontal, vertical 나열 방향을 정합니다.
+weight - 가중치를 정합니다.
+
+2. RelativeLayout(렐러티브 레이아웃)
+속성
+2-1. 뷰로 설정
+layout_to[위치]Of="[대상]" - [대상]의 [위치]로 지정. 사용 가능 위치 Right, Left, above(위), below(밑), StartOf, EndOf
+layout_align[위치]="[대상]" - [대상]의 [위치]로 정렬. 사용 가능 위치 Right Left Top Bottom Baseline(기본 라인)
+2-2. true/false값으로 설정
+layout_alignParentRight="true" 부모의 오른쪽
+layout_alignParentLeft="true" 부모의 왼쪽
+layout_alignParentTop="true" 부모의 위쪽
+layout_alignParentBottom="true" 부모의 아랫쪽
+layout_centerInParent="true" 부모의 가운데
+layout_centerHorizontal="true" 부모의 수평 가운데
+layout_centerVertical="true" 부모의 수직 가운데
+layout_alignParentStart="true" 부모의 시작지점
+layout_alignParentEnd="true" 부모의 끝지점
+
+-----------------------------------------------------------------
+
+layout_toLeftOf	뷰(View)를 기준 뷰(Anchor View)의 왼쪽(Left)에 배치.
+layout_above	뷰(View)를 기준 뷰(Anchor View)의 위(Above)에 배치.
+layout_toRightOf	뷰(View)를 기준 뷰(Anchor View)의 오른쪽(Right)에 배치.
+layout_below	뷰(View)를 기준 뷰(Anchor View)의 아래(Below)에 배치.
+layout_toStartOf	뷰(View)를 기준 뷰(Anchor View)의 시작(Start)에 배치.
+layout_toEndOf	뷰(View)를 기준 뷰(Anchor View)의 끝(End)에 배치.
+layout_alignParentLeft	뷰(View)를 부모(Parent) 영역 내에서 왼쪽(Left)에 배치.
+layout_alignParentTop	뷰(View)를 부모(Parent) 영역 내에서 위쪽(Top)에 배치.
+layout_alignParentRight	뷰(View)를 부모(Parent) 영역 내에서 오른쪽(Right)에 배치.
+layout_alignParentBottom	뷰(View)를 부모(Parent) 영역 내에서 아래쪽(Bottom)에 배치.
+layout_centerHorizontal	뷰(View)를 부모(Parent) 영역의 가로 방향 가운데 배치.
+layout_centerVertical	뷰(View)를 부모(Parent) 영역의 세로 방향 가운데 배치.
+layout_centerInParent	뷰(View)를 부모(Parent) 영역의 정 중앙(center)에 배치.
+layout_alignParentStart	뷰(View)를 부모(Parent) 영역의 시작 지점(Start)에 배치.
+layout_alignParentEnd	뷰(View)를 부모(Parent) 영역의 끝 지점(End)에 배치.
+layout_alignLeft	뷰(View)의 왼쪽(Left)을 기준 뷰(View)의 왼쪽(Left)에 맞춤.
+layout_alignTop	뷰(View)의 위(Top)를 기준 뷰(View)의 위(Top)에 맞춤.
+layout_alignRight	뷰(View)의 오른쪽(Right)를 기준 뷰(View)의 오른쪽(Right)에 맞춤.
+layout_alignBottom	뷰(View)의 아래(Bottom)를 기준 뷰(View)의 아래(Bottom)에 맞춤.
+layout_alignBaseline	뷰(View)의 폰트 기준선(Baseline)을 기준 뷰(View)의 폰트 기준선(Baseline)에 맞춤.
+
+
+
+
+android:layout_below="@id/radio" (( id가 ~인 것의 아래로 ))
+
+3. TableLayout(테이블 레이아웃)
+속성
+<TableRow></TableRow> - 테이블 레이아웃의 행을 추가 해줍니다.
+weight - 가중치를 추가 해줍니다.
+layout_span="정수" 지정한 정수 만큼 행을 합쳐줍니다.
+
+4. ConstraintLayout(컨스트레인트 레이아웃)
+속성
+layout_constraint[위치1]_to[위치2]Of="[대상]" - 지정 할 뷰의 [위치1]을 [대상]의 [위치2]에 지정합니다. 위치에 들어갈 코드는 Right, Left, Top, Bottom, Baseline, Start, End가 있습니다.
+layout_constraintCircle="대상" - 원을 만들 대상을 정합니다.
+layout_constraintCircleRadius="숫자" - 원의 크기를 정합니다.
+layout_constraintCircleAngle="0~360" - 원에서 위치가 될 각도를 지정합니다.
+
